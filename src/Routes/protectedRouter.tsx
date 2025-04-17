@@ -9,7 +9,7 @@ interface ProtectedRouteProps {
 export default function ProtectedRoute({ allowedRoles, userRole, children }: ProtectedRouteProps) {
   if (!userRole || !allowedRoles.includes(userRole)) {
     return <Navigate to="/" replace />; // redirige vers login 
-  }
+  } 
 
   return <>{children}</>;
 }
