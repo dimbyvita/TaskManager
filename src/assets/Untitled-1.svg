@@ -3,14 +3,13 @@
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 612 792" style="enable-background:new 0 0 612 792;" xml:space="preserve">
 <style type="text/css">
-	.st0{fill:none;}
-	.st1{fill:none;stroke:#464547;}
-	.st2{font-family:'BaskOldFace';}
-	.st3{font-size:487.127px;}
+	.st0{fill:#008156;}
+	.st1{font-family:'BookmanOldStyle';}
+	.st2{font-size:48px;}
+	.st3{fill:none;}
+	.st4{fill:#ABC287;}
 </style>
-<g id="Layer_3">
-	<rect x="14.2" y="222" class="st0" width="810" height="348.1"/>
-	<text transform="matrix(1.2412 0 0 1 14.1812 562.7658)" class="st1 st2 st3">M</text>
-	<text transform="matrix(1.2412 0 0 1 72.8491 472.2443)" class="st2 st3">T</text>
-</g>
+<text transform="matrix(1 0 0 1 414.2426 314.8916)" class="st0 st1 st2">T</text>
+<rect x="375.14" y="279.51" class="st3" width="89.61" height="106.49"/>
+<text transform="matrix(1 0 0 1 375.1398 313.8742)" class="st4 st1 st2">M</text>
 </svg>

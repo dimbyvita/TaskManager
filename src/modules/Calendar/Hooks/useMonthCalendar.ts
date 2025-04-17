@@ -11,7 +11,7 @@ export const useMonthCalendar = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/calendar/monthly/${nav}`);
+        const response = await axios.get(`http://localhost:4725/api/calendar/monthly/${nav}`);
         setDays(response.data.days);
         setMonthDisplay(response.data.monthDisplay);
       } catch (error) {
