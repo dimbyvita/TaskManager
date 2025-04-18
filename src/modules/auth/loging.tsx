@@ -12,13 +12,13 @@ export default function Login() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const res = await login(email, password);
+    const res = await login(email, password) ;
     setUser(res.data.user);
     navigate('/dashboard');
   };
 
   return (
-    <div className="flex h-screen min-h-full w-full bg-gradient-to-r from-blue-600 via-slate-500 to-gray-600 justify-center items-center px-6 py-12 lg:px-8">
+    <div className="flex h-screen min-h-full w-full bg-gradient-to-r from-yellow-200 via-slate-500 to-green-600 justify-center items-center px-6 py-12 lg:px-8">
           <section className="rounded-lg px-6 py-20 lg:px-8 bg-white/20 w-96">
             <div className='w-full flex justify-center'>
               <div className='w-32 h-32 bg-white bg-opacity-20 backdrop-blur-lg rounded-full flex items-center justify-center'>

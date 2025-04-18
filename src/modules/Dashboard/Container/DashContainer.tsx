@@ -16,7 +16,7 @@ const DashContainer: React.FC = () => {
       </div>
 
       {/* main part */}
-      <div className="bg-neutral-700 w-full h-full p-2 flex flex-col justify-between">
+      <div className="bg-green-400/25 w-full h-full p-2 flex flex-col justify-between">
         <div className='h-full'>
           <Header isOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
           {/* content */}
