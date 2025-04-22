@@ -5,14 +5,15 @@ import { useAuth } from '../../contexte/AuthContext';
 import { FaUnlockAlt, FaUserTie } from 'react-icons/fa';
 
 export default function Login() {
-  const [email, setEmail] = useState('');
+  const [pseudo, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [role, setRole] = useState('');
   const { setUser } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const res = await login(email, password) ;
+    const res = await login(pseudo, password, role) ;
     setUser(res.data.user);
     navigate('/dashboard');
   };
@@ -60,6 +61,18 @@ export default function Login() {
                     // value={formData.password}
                     required
                     placeholder="Password"
+                    className="block w-full rounded-md border-0 py-1.5 pl-7 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+                  />
+                </div>
+                <div className='relative flex items-center'>
+                  <FaUnlockAlt className='absolute left-2' />
+                  <input
+                    type="role"
+                    id="role"
+                    // onChange={(e) => setFormData({ role: e.target.value })}
+                    // value={formData.role}
+                    required
+                    placeholder="role"
                     className="block w-full rounded-md border-0 py-1.5 pl-7 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                   />
                 </div>
