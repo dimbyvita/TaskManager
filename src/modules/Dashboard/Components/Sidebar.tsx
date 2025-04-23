@@ -1,5 +1,6 @@
 import React from 'react';
 import { SidebarStatus } from '../Utils/Types';
+import { Link } from 'react-router-dom';
 
 
 
@@ -9,12 +10,13 @@ const Sidebar: React.FC<SidebarStatus> = ({ isOpen}) => {
       <h2>Sidebar</h2>
       
       <nav>
-        <ul className="nav-list">
-          <li className="nav-item py-2 border-b border-gray-300">1</li>
-          <li className="nav-item py-2 border-b border-gray-300">2</li>
-          <li className="nav-item py-2 border-b border-gray-300">3</li>
+        <ul className="nav-list flex-1">
+          <Link to="/Home" className="nav-item py-2 border-b border-gray-300">Home</Link>
+          <Link to="/Task" className="nav-item py-2 border-b border-gray-300">Todo Liste</Link>
+          <Link to="/Chart" className="nav-item py-2 border-b border-gray-300">Dashboard</Link>
+          <Link to="/Employe" className="nav-item py-2 border-b border-gray-300">Employee</Link>
         </ul>
-      </nav>
+      </nav> 
     </aside>
   );
 };

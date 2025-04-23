@@ -2,9 +2,10 @@ import { createBrowserRouter } from 'react-router-dom';
 import { CalendarContainer } from '../modules/Calendar/Container/CalendarContainer';
 import App from '../App';
 import ProtectedRoute from './protectedRouter';
-import Login from '../modules/auth/loging';
+
 import ChartEvo from '../modules/Chart/UI/Chart';
 import CombinedChart from '../modules/Chart/UI/Chart.complex';
+import LoginPage from '../modules/Auth/Pages/LoginPage';
 
 const userRole = localStorage.getItem('role');
 
@@ -39,7 +40,7 @@ export const router = createBrowserRouter([
   },
   {
     path: '',
-    element: <Login />,
+    element: <LoginPage children />,
   },
   {
     path: '*',
