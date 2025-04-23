@@ -22,7 +22,7 @@ export const useLogin = () => {
                 setUser(userData);
                 setToken(userData.token);
                 toast.success("User logged in successfully!");
-                navigate("/dashboard");
+                navigate("/home");
             } else {
                 throw new Error("Invalid response from server");
             }
