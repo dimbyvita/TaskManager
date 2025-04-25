@@ -5,7 +5,7 @@ export const useChartData = ()  => {
     useEffect(()=>{
         const fetchData = async () => {
             try{
-                const response = await axios.get(`http://localhost:4725/api/chart/}`)
+                const response = await axios.get(`http://localhost:4257/api/chart/}`)
                 
             }
             catch{}

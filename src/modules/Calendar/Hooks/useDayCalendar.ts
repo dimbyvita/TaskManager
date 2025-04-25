@@ -11,7 +11,7 @@ export const useDayCalendar = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:4725/api/calendar/daily/${nav}`);
+        const response = await axios.get(`http://localhost:4257/api/calendar/daily/${nav}`);
         setDays(response.data.days);
         setdayDisplay(response.data.dayDisplay);
       } catch (error) {
