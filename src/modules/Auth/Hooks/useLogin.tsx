@@ -1,7 +1,7 @@
 import { toast } from "react-toastify";
 import { library } from "../lib/lib";
-import { loginAPI } from "../services/Authserv";
 import { useNavigate } from "react-router-dom";
+import { loginAPI } from "../services/Authserv";
 
 export const useLogin = () => {
     const navigate = useNavigate();
@@ -10,7 +10,7 @@ export const useLogin = () => {
     const login = async (pseudo: string, password: string, role: string) => {
         try {
             const response = await loginAPI({ pseudo, password, role });
-            if (response && response.data) {
+            if (response && response.data && response.data.token) {
                 const userData = response.data;
 
                 if (!userData.token) {

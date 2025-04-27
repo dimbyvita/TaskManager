@@ -41,10 +41,12 @@ export const LoginPage = (props: Props) => {
                                     {errors.pseudo && <p className="text-red-500">{errors.pseudo.message}</p>}
                                 </div>
                                 <div className='flex justify-end '>
-                                    <select className='border-none p-3 rounded-lg' onChange={handleChange}>
-                                    <option value="admin">admin</option> {/* Option pour la vue mensuelle */}
-                                    <option value="Supervisor">Supervisor</option> {/* Option pour la vue hebdomadaire */}
-                                    <option value="user">user</option> {/* Option pour la vue quotidienne */}
+                                    <select className='border-none p-3 rounded-lg' 
+                                        // onChange={handleChange} 
+                                        {...register("role")}>
+                                        <option value="admin">admin</option> {/* Option pour la vue mensuelle */}
+                                        <option value="Supervisor">Supervisor</option> {/* Option pour la vue hebdomadaire */}
+                                        <option value="user">user</option> {/* Option pour la vue quotidienne */}
                                     </select>
                                 </div>
                                 <div>

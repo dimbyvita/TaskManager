@@ -2,7 +2,6 @@ import { createBrowserRouter } from 'react-router-dom';
 import { CalendarContainer } from '../modules/Calendar/Container/CalendarContainer';
 import App from '../App';
 import ProtectedRoute from './protectedRouter';
-
 import ChartEvo from '../modules/Chart/UI/Chart';
 import CombinedChart from '../modules/Chart/UI/Chart.complex';
 import LoginPage from '../modules/Auth/Pages/LoginPage';
@@ -14,9 +13,9 @@ export const router = createBrowserRouter([
   {
     path: '/home',
     element:(
-      //rotectedRoute allowedRoles={['admin', 'manager', 'user']} userRole={userRole}>
+      <ProtectedRoute allowedRoles={['admin', 'manager', 'user']} userRole={userRole}>
         <App />
-      //ProtectedRoute>
+      </ProtectedRoute>
     ), 
     children: [
       {
