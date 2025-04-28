@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 // Hook personnalisé pour gérer le changement de format d'affichage (par exemple, mensuel, hebdomadaire)
 export const useChangeFormat = () => {

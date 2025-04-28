@@ -40,14 +40,14 @@ export const router = createBrowserRouter([
   },
   {
     path: '',
-    element: <LoginPage children />,
+    element: <LoginPage />,
   },
   {
     path: '/register',
     element:
     (
       <ProtectedRoute allowedRoles={['manager']} userRole={userRole}>
-        <RegisterPage children/>
+        <RegisterPage/>
       </ProtectedRoute>
     ) 
   },

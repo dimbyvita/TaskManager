@@ -1,6 +1,6 @@
 export type UserProfileToken = {
     pseudo: string;
-    email: string;
+    role: string;
     token: string;
 }
 
@@ -15,7 +15,7 @@ export type UserContextType = {
 
 export type UserProfile = {
     pseudo: string;
-    email: string;
+    role: string;
 }
 
 export type Props = { children: React.ReactNode};

@@ -3,11 +3,11 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useRegister } from "../Hooks/useRegister";
 import { validationRegister } from "../services/validationRegister"; // Ensure you have validation rules defined for registration
-import { Props, RegisterFormInputs } from "../utils/UserUtil"; // Define the types for form inputs
+import { RegisterFormInputs } from "../utils/UserUtil"; // Define the types for form inputs
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 
-export const RegisterPage = (props: Props) => {
+export const RegisterPage = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<RegisterFormInputs>({ 
         resolver: yupResolver(validationRegister)
     });
