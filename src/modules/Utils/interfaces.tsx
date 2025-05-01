@@ -27,7 +27,7 @@ export class EmployeeId {
 export interface User {
     userId: EmployeeId;
     userInfo?: EmployeeInfo | null;
-    userRole: string;
+    Role: string;
     userPassword: string | number;
 }
 

@@ -1,100 +1,134 @@
 
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useRegister } from "../Hooks/useRegister";
-import { validationRegister } from "../services/validationRegister"; // Ensure you have validation rules defined for registration
-import { RegisterFormInputs } from "../utils/UserUtil"; // Define the types for form inputs
-import { toast } from "react-toastify";
-import { Link, useNavigate } from "react-router-dom";
 
-export const RegisterPage = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm<RegisterFormInputs>({ 
-        resolver: yupResolver(validationRegister)
-    });
-    const { registerUser } = useRegister();
-    const navigate = useNavigate();
+import React, { useState } from 'react';
+import { useRegister } from '../Hooks/useRegister';
 
-    const onSubmit = async (data: RegisterFormInputs) => {
-        try {
-            const response = await registerUser(data.email, data.pseudo, data.password, data.role);
-            if (response) {
-                toast.success("Registration successful! You can now log in.");
-                navigate("/login");
-            }
-        } catch (error) {
-            toast.error("Registration failed. Please try again.");
-            console.error(error);
+const RegisterPage: React.FC = () => {
+    const { registerUser, loading, data, error } = useRegister();
+    const [email, setEmail] = useState<string>('')
+    const [pseudo, setPseudo] = useState<string>('')
+    const [password, setPassword] = useState<string>('')
+    const [role, setRole] = useState<string>('')
+
+    const handleSubmit =  async (e:React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        await registerUser(email, pseudo, password, role)
+
+        if (data) {
+            console.log('Registration successfull!', data);   
+        } else {
+            console.error('Registration error', error);
         }
-    };
+    }
 
-    return (
-        <div>
-            <section className="bg-gray-50 dark:bg-gray-900">
-                <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-                    <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-                        <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-                            <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                                Sign up for an account
-                            </h1>
-                            <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit(onSubmit)}>
-                                <div>
-                                    <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                        Email
-                                    </label>
-                                    <input
-                                        type="email"
-                                        id="email"
-                                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="Email"
-                                        {...register("email")}
-                                    />
-                                    {errors.email && <p className="text-red-500">{errors.email.message}</p>}
-                                </div>
-                                <div>
-                                    <label htmlFor="pseudo" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                        pseudo
-                                    </label>
-                                    <input
-                                        type="text"
-                                        id="pseudo"
-                                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="pseudo"
-                                        {...register("pseudo")}
-                                    />
-                                    {errors.pseudo && <p className="text-red-500">{errors.pseudo.message}</p>}
-                                </div>
-                                <div>
-                                    <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                        Password
-                                    </label>
-                                    <input
-                                        type="password"
-                                        id="password"
-                                        placeholder="••••••••"
-                                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        {...register("password")}
-                                    />
-                                    {errors.password && <p className="text-red-500">{errors.password.message}</p>}
-                                </div>
-                                <button
-                                    type="submit"
-                                    className="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                                >
-                                    Sign up
-                                </button>
-                                <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                                    Already have an account?{" "}
-                                    <Link to="/login" className="font-medium text-blue-600 hover:underline dark:text-blue-500">
-                                        Sign in
-                                    </Link>
-                                </p>
-                            </form>
+  return (
+    <>
+      {data ? (
+        <section className='text-green-800'>
+          <h1>Success!</h1>
+          <p>
+            <a href="#">Sign In</a>
+          </p>
+        </section>
+      ) : (
+        <section className="w-full bg-gradient-to-br from-teal-800 via-stone-400 to-yellow-600 min-h-screen flex items-center justify-center lg:px-8 loginpage">
+          <div className="sm:w-[100%] md:w-[50%] py-10 px-12 bg-black dark:bg-white/70 backdrop-blur-lg rounded-xl logincard">
+                <div className="w-full h-auto flex items-center gap-x-1 my-5">
+                    <div className="w-1/2 h-[1.5px] bg-gray-700/40 rounded-md"></div>
+                    <p className="text-3xl text-gray-700 font-semibold px-2">REGISTER</p>
+                    <div className="w-1/2 h-[1.5px] bg-gray-700/40 rounded-md"></div>
+                </div>
+                <p className="text-sm text-white dark:text-teal-950 font-normal mb-8">
+                    Need a new employee you litle fellow?
+                </p>
+                <form onSubmit={handleSubmit}>
+                    <div className=" w-full">
+                        <div>
+                            <label className="flex items-center space-x-1 text-sm font-medium leading-6 text-white dark:text-teal-950 mb-1" htmlFor="pseudo">
+                            Pseudo:
+                            </label>
+                            <input
+                                type="text"
+                                className="w-full h-12 p-4 outline-none bg-transparent border-[2px] rounded-md border-gray-400/40 text-white dark:text-teal-950"
+                                id="pseudo"
+                                autoComplete="off"
+                                value={pseudo}
+                                onChange={(e) => setPseudo(e.target.value)}
+                                required
+                            />
                         </div>
                     </div>
-                </div>
-            </section>
-        </div>
-    );
+                    
+                        {/* Basic contact info */}
+                    <div className=" w-full gap-3 flex">
+                        <div>
+                            <label className="flex items-center space-x-1 text-sm font-medium leading-6 text-white dark:text-teal-950 mb-1" htmlFor="email">Email:</label>
+                            <input
+                            type="email"
+                            className="w-full h-12 p-4 outline-none bg-transparent border-[2px] rounded-md border-gray-400/40 text-white dark:text-teal-950"
+                            id="email"
+                            autoComplete="off"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                            />
+                        </div>
+                    </div>
+
+                        {/* Password part */}
+                    <div>
+                        <label className="flex items-center space-x-1 text-sm font-medium leading-6 text-white dark:text-teal-950 mb-1" htmlFor="password">
+                        Password:
+                        </label>
+                        <input
+                        type="password"
+                        className="w-full h-12 p-4 outline-none bg-transparent border-[2px] rounded-md border-gray-400/40 text-white dark:text-teal-950"
+                        id="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                        />
+                        <p
+                        id="pwdnote" className={!password ? 'instructions' : 'offscreen'}>
+                        8 to 24 characters.
+                        <br />
+                        Must include uppercase and lowercase letters, a number and a special character.
+                        <br />
+                        Allowed special characters: !@#$%
+                        </p>
+                    </div>                   
+
+                    <label className="flex items-center space-x-1 text-sm font-medium leading-6 text-white dark:text-teal-950 mb-1" htmlFor="role">Role:</label>
+                    <select
+                        className="w-full h-12 p-2 outline-none bg-transparent border-[2px] rounded-md border-gray-400/40 text-white dark:text-teal-950"
+                        id="role"
+                        name="role"
+                        value={role}
+                        onChange={(e) => setRole(e.target.value)}
+                        required
+                        >
+                        <option value="">Select Role</option>
+                        <option value="admin">Admin</option>
+                        <option value="manager">Manager</option>
+                    </select>
+
+                    <div className="w-full space-y-2 flex items-center justify-center">
+                        <button
+                            type='submit' disabled={loading}
+                            className="w-72 rounded-md bg-sky-700 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-700"
+                            aria-disabled={!password && !pseudo && !role} 
+                        >
+                            {loading ? 'Registering...' : 'Register'}
+                        </button>
+                    </div>
+                </form>
+          </div>
+          {error && <p className='text-red-800'> {error}</p> }
+        </section>
+      )}
+    </>
+  );
 };
 
 export default RegisterPage;

@@ -4,16 +4,16 @@ import App from '../App';
 import ProtectedRoute from './protectedRouter';
 import ChartEvo from '../modules/Chart/UI/Chart';
 import CombinedChart from '../modules/Chart/UI/Chart.complex';
-import LoginPage from '../modules/Auth/Pages/LoginPage';
+import { LoginPage } from '../modules/Auth/Pages/LoginPage';
 import RegisterPage from '../modules/Auth/Pages/RegisterPage';
 
-const userRole = localStorage.getItem('role');
+const Role = localStorage.getItem('role');
 
 export const router = createBrowserRouter([
   {
     path: '/home',
     element:(
-      <ProtectedRoute allowedRoles={['admin', 'manager', 'user']} userRole={userRole}>
+      <ProtectedRoute allowedRoles={['admin', 'manager', 'user']} Role={Role}>
         <App />
       </ProtectedRoute>
     ), 
@@ -27,7 +27,7 @@ export const router = createBrowserRouter([
       {
         path: 'Chart',
         element: (
-          <ProtectedRoute allowedRoles={['admin', 'manager']} userRole={userRole}>
+          <ProtectedRoute allowedRoles={['admin', 'manager']} Role={Role}>
             <ChartEvo />
           </ProtectedRoute>
         )
@@ -46,9 +46,9 @@ export const router = createBrowserRouter([
     path: '/register',
     element:
     (
-      <ProtectedRoute allowedRoles={['manager']} userRole={userRole}>
+      //<ProtectedRoute allowedRoles={['manager']} Role={Role}>
         <RegisterPage/>
-      </ProtectedRoute>
+      //</ProtectedRoute>
     ) 
   },
   {

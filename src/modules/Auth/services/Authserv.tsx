@@ -2,7 +2,8 @@ import axios from "axios";
 import { useError } from "../Hooks/useError";
 import { UserProfileToken } from "../utils/UserUtil";
 
-const api = "http://localhost:4257/auth/login";
+const apil = "http://localhost:4257/auth/login";
+const apir = "http://localhost:4257/auth/register";
 
 type Authentication = {
     pseudo: string;
@@ -13,7 +14,7 @@ type Authentication = {
 
 export const loginAPI = async (props: Authentication) => {
     try {
-        const data = await axios.post<UserProfileToken>(api , {
+        const data = await axios.post<UserProfileToken>(apil , {
             pseudo: props.pseudo,
             password: props.password,
             role: props.role
@@ -26,7 +27,7 @@ export const loginAPI = async (props: Authentication) => {
 
 export const registerAPI = async (props: Authentication) => {
     try {
-        const response = await axios.post(api , {
+        const response = await axios.post(apir , {
             email: props.email,
             pseudo: props.pseudo,
             password: props.password,

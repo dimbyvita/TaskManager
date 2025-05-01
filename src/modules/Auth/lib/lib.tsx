@@ -7,3 +7,17 @@ export const library = () => {
     const [isReady, setIsReady] = useState(false);
  return {token, user, isReady, setIsReady, setUser, setToken}
 };
+
+// export  const [credentials, setCredentials] = useState({
+//         user: '',
+//         name: '',
+//         firstName: '',
+//         address: '',
+//         matricule: '',
+//         telephone: '',
+//         email: '',
+//         Role: '',
+//         password: '',
+//         matchPassword: '',
+//         image: ''
+//     });

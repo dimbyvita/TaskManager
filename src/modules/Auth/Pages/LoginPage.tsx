@@ -1,106 +1,160 @@
-import { useForm } from "react-hook-form";
-import { useLogin } from "../Hooks/useLogin"; 
-import { LoginFormsInputs } from "../utils/UserUtil";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { validationLogin } from "../services/validationLogin";
 import { Link, useNavigate } from "react-router-dom";
+import { useState, useEffect, useRef, useContext } from "react";
+import { AuthContext } from "../../../contexte/AuthContext";
+import axios from '../../../api/axios';
+import { IUser } from "../../lib/UserInterface";
+import { AxiosRequestConfig } from "axios";
 
-export const LoginPage = () => {
-    const { login } = useLogin();
-    const { register, handleSubmit, formState: { errors } } = useForm<LoginFormsInputs>({
-        resolver: yupResolver(validationLogin),
-    });
+const LOGIN_URL = '/auth/login';
 
-    const navigate = useNavigate();
-    const onSubmit = (data: LoginFormsInputs) => {
-        login(data.pseudo, data.password, data.role, navigate); // Appel de login
+export const LoginPage: React.FC = () => {
+    const { user, setUser } = useContext(AuthContext);
+    const userRef = useRef<HTMLInputElement>(null);
+    const errRef = useRef<HTMLParagraphElement>(null);
+    const navigate = useNavigate()
+
+    const [pseudo, setPseudo] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [Role, setRole]= useState<string>('');
+    const [errMsg, setErrMsg] = useState<string>('');
+    const [success, setSuccess] = useState<boolean>(false);
+
+    useEffect(() => {
+        if (userRef.current) {
+            userRef.current.focus();
+        }
+    }, []);
+
+    useEffect(() => {
+        setErrMsg('');
+    }, [pseudo, password, Role]);
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        try {
+            const config: AxiosRequestConfig = {   
+                headers: { 'Content-Type': 'application/json' }, // Corrected Content-Type
+                withCredentials: true,
+            }
+            const response = await axios.post(LOGIN_URL, JSON.stringify({ pseudo, password, role: Role }),config);
+            console.log(JSON.stringify(response?.data));
+            const foundUser: IUser = response?.data;
+            setUser(foundUser);
+            setPseudo('');
+            setRole('');
+            setPassword('');
+            setSuccess(true);
+            navigate("/home")
+        } catch (err: any) { //Type assertion for err
+            if (!err?.response) {
+                setErrMsg('No server Response');
+            } else if (err.response?.status === 400) {
+                setErrMsg('Missing Username or Password');
+            } else if (err.response?.status === 401) {
+                setErrMsg('Unauthorized');
+            } else {
+                setErrMsg('Login Failed');
+            }
+            if (errRef.current) {
+                errRef.current.focus();
+            }
+        }
     };
 
     return (
-        <section className="bg-gray-50 dark:bg-gray-900">
-            <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-                <div className="w-full bg-white rounded-lg shadow dark:border md:mb-20 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-                    <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-                        <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                            Sign in to your account
-                        </h1>
-                        <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit(onSubmit)}>
-                            <div>
-                                <label htmlFor="pseudo" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                    Pseudo
-                                </label>
-                                <input
-                                    type="text"
-                                    id="pseudo"
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="Pseudo"
-                                    {...register("pseudo")}
-                                />
-                                {errors.pseudo && <p className="text-red-500">{errors.pseudo.message}</p>}
-                            </div>
+        <>
 
-                            <div className="flex justify-end">
-                                <select className="border-none p-3 rounded-lg" {...register("role")}>
-                                    <option value="admin">Admin</option>
-                                    <option value="Supervisor">Supervisor</option>
-                                    <option value="user">User</option>
-                                </select>
-                            </div>
+            {success ? (
+                <section>
+                    <h1>You are logged in!</h1>
+                    <br />
+                    <p>
+                        <Link to="/home">Go to Home</Link>
+                    </p>
+                </section>
+            ) : (
 
-                            <div>
-                                <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                    Password
-                                </label>
-                                <input
-                                    type="password"
-                                    id="password"
-                                    placeholder="••••••••"
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    {...register("password")}
-                                />
-                                {errors.password && <p className="text-red-500">{errors.password.message}</p>}
-                            </div>
+            <div className="w-full bg-gradient-to-br from-teal-800 via-stone-400 to-yellow-600 min-h-screen flex items-center justify-center lg:px-8 loginpage">
+                <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
+                <div className="sm:w-[100%] md:w-[50%] py-10 px-12 bg-black dark:bg-white/70 backdrop-blur-lg rounded-xl logincard">
 
-                            <div className="flex items-center justify-between">
-                                <div className="flex items-start">
-                                    <div className="flex items-center h-5">
-                                        <input
-                                            id="remember"
-                                            aria-describedby="remember"
-                                            type="checkbox"
-                                            className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
-                                        />
-                                    </div>
-                                    <div className="ml-3 text-sm">
-                                        <label htmlFor="remember" className="text-gray-500 dark:text-gray-300">
-                                            Remember me
-                                        </label>
-                                    </div>
-                                </div>
-                                <Link to={""} className="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
-                                    Forgot password?
-                                </Link>
-                            </div>
 
-                            <button
-                                type="submit"
-                                className="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                            >
-                                Sign in
-                            </button>
-
-                            <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                                Don’t have an account yet?{" "}
-                                <Link to={"/register"} className="font-medium text-blue-600 hover:underline dark:text-blue-500">
-                                    Sign up
-                                </Link>
-                            </p>
-                        </form>
+                    {/* this is just a separation  */}
+                    <div className="w-full h-auto flex items-center gap-x-1 my-5">
+                        <div className="w-1/2 h-[1.5px] bg-gray-700/40 rounded-md"></div>
+                        <p className="text-3xl text-gray-700 font-semibold px-2">LOGIN</p>
+                        <div className="w-1/2 h-[1.5px] bg-gray-700/40 rounded-md"></div>
                     </div>
+                    <p className="text-sm text-white dark:text-teal-950 font-normal mb-8">
+                        Are you ready to start a new day?
+                    </p>
+                    <form onSubmit={handleSubmit}>
+                        {/* Real Login part */}
+                        <div className="w-full h-auto mb-5">
+                            <label htmlFor="pseudo" className="block text-white dark:text-teal-950 mb-1"> User name </label>
+                            <input
+                                required
+                                type="text"
+                                className="w-full h-12 p-4 outline-none bg-transparent border-[2px] rounded-md border-gray-200/40 text-white dark:text-teal-950"
+                                id="pseudo" // Changed id to "pseudo" to match label's htmlFor
+                                ref={userRef}
+                                onChange={(e) => setPseudo(e.target.value)}
+                                value={pseudo}
+                                placeholder="Enter your username"
+                            />
+
+                        </div>
+
+                        <div className="w-full h-auto mb-5 text-white dark:text-teal-950">
+                            <label htmlFor="role" className="block text-white dark:text-teal-950 mb-1"> Role selection </label>
+                            <select 
+                                className="w-full text-sm h-12 p-2 outline-none bg-transparent border-[2px] rounded-md border-gray-200/40 text-white dark:text-teal-950" 
+                                id="role"
+                                value={Role}
+                                onChange={(e)  => setRole(e.target.value)}
+                            >
+                                <option value="">--Please Choose your role--</option>
+                                <option value="admin">Admin</option>
+                                <option value="manager">Manager</option>
+                            </select>
+
+                        </div>
+
+                        <div className="w-full h-auto mb-5 text-white dark:text-teal-950">
+                            <label htmlFor="password" className="block text-white dark:text-teal-950 mb-1"> Password </label>
+                            <input
+                                required
+                                type="password"
+                                className="w-full h-12 p-4 outline-none bg-transparent border-[2px] rounded-md border-gray-200/40 text-white dark:text-teal-950"
+                                id="password" // Changed id to "password" to match label's htmlFor
+                                onChange={(e) => setPassword(e.target.value)}
+                                value={password}
+                                placeholder="Enter your password"
+                            />
+                        </div>
+
+                        {/* the bottoms */}
+                        <div className="w-full h-auto flex items-center justify-between mb-5">
+                            <div className="flex items-center gap-x-2">
+                                <input 
+                                    type="checkbox" 
+                                    className="w-4 h-4 accent-gray-200/20 border border-gray-200/20 rounded-md text-white dark:text-teal-950" 
+                                    id="remember" 
+                                />
+                                <label htmlFor="remember" className="text-[0.875rem] text-white dark:text-teal-950 ">Remember me</label>
+                            </div>
+                            <div className="w-auto h-auto">
+                                <Link to='/' className="text-white dark:text-teal-950 text-sm font-medium hover:underline ease-in-out duration-500">Forgot Password?</Link>
+                            </div>
+                        </div>
+                        <button className="w-full h-12 outline-none bg-white/70 rounded-md text-lg text-black font-medium mb-7">
+                            LOGIN
+                        </button>
+                    </form>
                 </div>
             </div>
-        </section>
-    );
-};
-
-export default LoginPage;
+            )}
+        </>
+    )
+}

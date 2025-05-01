@@ -2,7 +2,7 @@ import { createContext, useContext, useState } from 'react';
 import { IUser } from '../modules/lib/UserInterface';
 
 
-const AuthContext = createContext<{
+export const AuthContext = createContext<{
   user: IUser | null;
   setUser: React.Dispatch<React.SetStateAction<IUser | null>>;
 }>({
