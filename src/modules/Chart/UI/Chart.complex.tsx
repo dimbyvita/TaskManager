@@ -78,7 +78,7 @@ function Crosshair({ svgRef }: { svgRef: React.RefObject<SVGSVGElement | null> }
 
       {/* X value */}
       {xPos && (
-        <StyledText x={xPos + 5} y={top + 15}>
+        <StyledText x={xPos + 1} y={top + 15}>
           X: {xStep}
         </StyledText>
       )}

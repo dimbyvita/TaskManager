@@ -31,10 +31,6 @@ export const router = createBrowserRouter([
             <ChartEvo />
           </ProtectedRoute>
         )
-      },
-      {
-        path: 'complex',
-        element:<CombinedChart />
       }
     ]
   },

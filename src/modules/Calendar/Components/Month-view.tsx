@@ -47,15 +47,15 @@ export const MonthView = (): ReactElement => {
                   {days.slice(rowIndex * 7, rowIndex * 7 + 7).map((day: Day, index: number) => (
                     <td
                       key={index}
-                      className={`relative border border-gray-300 bg-slate-100 hover:bg-gradient-to-r from-blue-200 to-violet-400 p-2 
-                        ${day.isWeekend ? 'bg-slate-100 text-slate-400' : ''} 
+                      className={`relative border border-gray-300 bg-slate-100 hover:bg-gradient-to-r from-green-200 via-indigo-300 to-yellow-400 p-2 
+                        ${day.isWeekend ? 'bg-slate-100 text-slate-400/25' : ''} 
                         ${day.isCurrentDay ? 'bg-blue-300/45 text-blue-700' : ''}
                         ${day.isNextMonthDay ? 'text-slate-600 bg-slate-300' : ''}
                         ${day.isPreviousMonthDay ? 'text-slate-600 bg-slate-300' : ''}
                         ${day.isPassedDay ? 'cursor-not-allowed': 'cursor-pointer'}
                       `}
                     >
-                      <span className='absolute top-2 right-2 text-sm font-semibold'>
+                      <span className='top-2 right-2 text-sm font-semibold'>
                         <AfficheDay
                           day={day} // Composant pour afficher les détails du jour
                         />

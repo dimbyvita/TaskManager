@@ -1,13 +1,12 @@
-import React from 'react';
 import { LineChart } from '@mui/x-charts';
 
 export default function ChartEvo() {
   return (
     <LineChart
-      xAxis={[{ data: [1, 2, 3, 5, 8, 10, 12, 15, 16] }]}
+      // xAxis={[{ data: [1, 2, 3, 5, 8, 10, 12, 15, 16] }]}
       series={[
         {
-          data: [2, 5.5, 2, 8, 15, 5, null, null, null],
+          data: [2, 55, 2, 8, 15, 5, null, null, null],
           valueFormatter: (value: number | null) =>
             value == null ? 'NaN' : value.toString(),
         },
@@ -20,8 +19,10 @@ export default function ChartEvo() {
             value == null ? '?' : value.toString(),
         },
       ]}
+      yAxis={[{ data: [1, 2, 3, 5, 8, 10, 12, 15, 16] }]}
       height={200}
       margin={{ top: 10, bottom: 20 }}
+      width={700}
     />
   );
 }

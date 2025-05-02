@@ -9,24 +9,26 @@ const DashContainer: React.FC = () => {
   const { sidebarOpen, toggleSidebar } = useSidebar();
 
   return (
-    <div className="flex w-full h-screen overflow-scroll md:overflow-hidden">
-      {/* side part */}
-      <div className={`${sidebarOpen ? 'block' : 'hidden'} w-64 bg-slate-300 p-2 h-full`}>
-        <Sidebar isOpen={sidebarOpen} />
-      </div>
+    <div className="w-full overflow-scroll md:overflow-hidden">
+      <div className="relative flex bg-slate-200 h-full w-full">
+        {/* side part */}
+        <div className={`${sidebarOpen ? 'block' : 'hidden'} w-64 bg-slate-300 p-2`}>
+          <Sidebar isOpen={sidebarOpen} />
+        </div>
 
-      {/* main part */}
-      <div className="bg-green-400/25 w-full h-full p-2 flex flex-col justify-between">
-        <div className='h-full'>
-          <Header isOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
-          {/* content */}
-          <div className="flex justify-center">
-            <div className="overflow-y-auto">
-              <Outlet />
+        {/* main part */}
+        <div className=" w-full h-full flex flex-col justify-between">
+          <div className='h-full'>
+            <Header isOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
+            {/* content */}
+            <div className="flex justify-center">
+              <div className="overflow-y-auto">
+                <Outlet />
+              </div>
             </div>
+            {/* content */}
+            <Footer />
           </div>
-          {/* content */}
-          <Footer />
         </div>
       </div>
     </div>
