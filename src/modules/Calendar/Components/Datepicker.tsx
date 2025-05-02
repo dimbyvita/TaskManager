@@ -12,7 +12,7 @@ export const Datepicker = (): ReactElement => {
 
   return (
     <div className='h-full'>
-      <div id='Simple Calendar' className='flex w-96 h-96 py-5'>
+      <div id='Simple Calendar' className='flex w-full h-96 py-5'>
         <div className='bg-slate-200 flex flex-col gap-3 p-2 rounded-md h-full'>
           <header className='flex items-center'>
             {/* En-tête du calendrier avec les boutons de navigation */}

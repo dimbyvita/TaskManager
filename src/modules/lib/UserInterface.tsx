@@ -3,7 +3,7 @@ export interface IUser extends Document {
     name: string;
     pseudo: string;
     password: string;
-    role: 'admin' | 'manager';
+    Role: string;
     comparePassword(candidatePassword: string): Promise<boolean>;
     position: string,
     department: string,

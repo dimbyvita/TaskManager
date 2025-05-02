@@ -8,7 +8,7 @@ const apir = "http://localhost:4257/auth/register";
 type Authentication = {
     pseudo: string;
     password: string;
-    role: string;
+    Role: string;
     email?: string;
 };
 
@@ -17,7 +17,7 @@ export const loginAPI = async (props: Authentication) => {
         const data = await axios.post<UserProfileToken>(apil , {
             pseudo: props.pseudo,
             password: props.password,
-            role: props.role
+            Role: props.Role
         });
         return data;
     } catch (error) {
@@ -31,7 +31,7 @@ export const registerAPI = async (props: Authentication) => {
             email: props.email,
             pseudo: props.pseudo,
             password: props.password,
-            role: props.role
+            Role: props.Role
         });
         return response;
     } catch (error) {

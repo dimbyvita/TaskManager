@@ -7,13 +7,13 @@ import CombinedChart from '../modules/Chart/UI/Chart.complex';
 import { LoginPage } from '../modules/Auth/Pages/LoginPage';
 import RegisterPage from '../modules/Auth/Pages/RegisterPage';
 
-const Role = localStorage.getItem('role');
+const Role = localStorage.getItem('Role');
 
 export const router = createBrowserRouter([
   {
     path: '/home',
     element:(
-      <ProtectedRoute allowedRoles={['admin', 'manager', 'user']} Role={Role}>
+      <ProtectedRoute allowedRoles={['admin', 'manager']} >
         <App />
       </ProtectedRoute>
     ), 
@@ -27,7 +27,7 @@ export const router = createBrowserRouter([
       {
         path: 'Chart',
         element: (
-          <ProtectedRoute allowedRoles={['admin', 'manager']} Role={Role}>
+          <ProtectedRoute allowedRoles={['admin', 'manager']} >
             <ChartEvo />
           </ProtectedRoute>
         )
@@ -46,9 +46,9 @@ export const router = createBrowserRouter([
     path: '/register',
     element:
     (
-      //<ProtectedRoute allowedRoles={['manager']} Role={Role}>
+      <ProtectedRoute allowedRoles={['manager']} >
         <RegisterPage/>
-      //</ProtectedRoute>
+      </ProtectedRoute>
     ) 
   },
   {

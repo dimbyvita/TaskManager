@@ -1,19 +1,18 @@
-import { useContext } from 'react';
 import { Navigate } from 'react-router-dom';
-import { UserContext } from '../modules/Auth/Context/UserProvider';
+import { useAuth } from '../contexte/AuthContext';
 
 interface ProtectedRouteProps {
   allowedRoles: string[];
-  Role: string | null;
   children: React.ReactNode;
 }
 
 export default function ProtectedRoute({ allowedRoles, children }: ProtectedRouteProps) {
-    const { Role } = useContext(UserContext)
+  const { user, Role } = useAuth();
 
-  if (!Role || !allowedRoles.includes(Role)) {
-    return <Navigate to="/" replace />; // redirige vers login 
-  } 
-
+  // Not logged in → redirect to login
+  if (!user && !allowedRoles.includes(Role || '')) {
+    return <Navigate to="/" replace />;
+  }
+  // Allowed → render children
   return <>{children}</>;
 }

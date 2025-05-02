@@ -6,10 +6,10 @@ export const useRegister = () => {
     const [data, setData]  = useState(null)
     const [error, setError]  = useState(null)
 
-    const registerUser = async (email: string, pseudo: string, password: string, role: string) => {
+    const registerUser = async (email: string, pseudo: string, password: string, Role: string) => {
         setLoading(true);
         try {
-            const response = await registerAPI({ email, pseudo, password, role });
+            const response = await registerAPI({ email, pseudo, password, Role });
             if (response && response.data) {
                 setData(response.data)
                 setLoading(false);

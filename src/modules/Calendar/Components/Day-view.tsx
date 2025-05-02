@@ -8,15 +8,21 @@ export const DayView = () => {
 
   // Check if days is an array and has at least one element
   const isDaysValid = Array.isArray(days) && days.length > 0;
- 
+
   return (
-    <div className='h-full overflow-y-scroll p-3 '>
+    <div className='h-full overflow-y-scroll p-3'>
       <header className='flex items-center'>
         <div className='flex mb-4 items-center'>
-          <ButtonBack onClick={() => setNav(nav - 1)} />
-          <button onClick={handleTodayClick} className='p-2 rounded'>Today</button>
-          <ButtonForward onClick={() => setNav(nav + 1)} />
-          <h1 className=''>{dayDisplay}</h1>
+          <ButtonBack onClick={() => setNav(nav - 1)} aria-label="Previous Day" />
+          <button 
+            onClick={handleTodayClick} 
+            className='p-2 rounded' 
+            aria-label="Go to Today"
+          >
+            Today
+          </button>
+          <ButtonForward onClick={() => setNav(nav + 1)} aria-label="Next Day" />
+          <h1 className='ml-4'>{dayDisplay}</h1>
         </div>
       </header>
 
@@ -25,11 +31,14 @@ export const DayView = () => {
           {isDaysValid ? (
             Array.from({ length: 24 }, (_, hour) => (
               <div key={hour} className='p-1 w-full cursor-pointer'>
-                {days[0].value ? '':'adala'}
-                <p className='rounded border border-gray-300 bg-slate-100 hover:bg-gradient-to-r from-blue-200 to-violet-400 p-2 '>
-                  {days[0]?.isCurrentDay ? '(Today)' : 'otherdays'}
-                  {days[0]?.isWeekend ? '(Weekend)' : ''}
-                  {days[0]?.isPassedDay ? '(Passed) ' : ''}
+                {/* Dynamic data rendering based on the hour */}
+                <p className='rounded border border-gray-300 bg-slate-100 hover:bg-gradient-to-r from-blue-200 to-violet-400 p-2'>
+                  {days[hour]?.isCurrentDay ? '(Today)' : 'otherdays'}
+                  {days[hour]?.isWeekend ? '(Weekend)' : ''}
+                  {days[hour]?.isPassedDay ? '(Passed)' : ''}
+                  <span className="block text-sm">
+                    {days[hour]?.value || 'No event scheduled'} {/* Display event or placeholder */}
+                  </span>
                 </p>
               </div>
             ))

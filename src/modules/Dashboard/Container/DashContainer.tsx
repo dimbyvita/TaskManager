@@ -20,12 +20,14 @@ const DashContainer: React.FC = () => {
         <div className='h-full'>
           <Header isOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
           {/* content */}
-          <div className="flex justify-center h-full">
-            <Outlet/>
+          <div className="flex justify-center">
+            <div className="overflow-y-auto">
+              <Outlet />
+            </div>
           </div>
           {/* content */}
+          <Footer />
         </div>
-        <Footer />
       </div>
     </div>
   );

@@ -8,12 +8,12 @@ const RegisterPage: React.FC = () => {
     const [email, setEmail] = useState<string>('')
     const [pseudo, setPseudo] = useState<string>('')
     const [password, setPassword] = useState<string>('')
-    const [role, setRole] = useState<string>('')
+    const [Role, setRole] = useState<string>('')
 
     const handleSubmit =  async (e:React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        await registerUser(email, pseudo, password, role)
+        await registerUser(email, pseudo, password, Role)
 
         if (data) {
             console.log('Registration successfull!', data);   
@@ -99,12 +99,12 @@ const RegisterPage: React.FC = () => {
                         </p>
                     </div>                   
 
-                    <label className="flex items-center space-x-1 text-sm font-medium leading-6 text-white dark:text-teal-950 mb-1" htmlFor="role">Role:</label>
+                    <label className="flex items-center space-x-1 text-sm font-medium leading-6 text-white dark:text-teal-950 mb-1" htmlFor="Role">Role:</label>
                     <select
                         className="w-full h-12 p-2 outline-none bg-transparent border-[2px] rounded-md border-gray-400/40 text-white dark:text-teal-950"
-                        id="role"
-                        name="role"
-                        value={role}
+                        id="Role"
+                        name="Role"
+                        value={Role}
                         onChange={(e) => setRole(e.target.value)}
                         required
                         >
@@ -117,7 +117,7 @@ const RegisterPage: React.FC = () => {
                         <button
                             type='submit' disabled={loading}
                             className="w-72 rounded-md bg-sky-700 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-700"
-                            aria-disabled={!password && !pseudo && !role} 
+                            aria-disabled={!password && !pseudo && !Role} 
                         >
                             {loading ? 'Registering...' : 'Register'}
                         </button>

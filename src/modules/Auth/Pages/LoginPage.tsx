@@ -37,7 +37,7 @@ export const LoginPage: React.FC = () => {
                 headers: { 'Content-Type': 'application/json' }, // Corrected Content-Type
                 withCredentials: true,
             }
-            const response = await axios.post(LOGIN_URL, JSON.stringify({ pseudo, password, role: Role }),config);
+            const response = await axios.post(LOGIN_URL, JSON.stringify({ pseudo, password, Role }),config);
             console.log(JSON.stringify(response?.data));
             const foundUser: IUser = response?.data;
             setUser(foundUser);
@@ -64,97 +64,103 @@ export const LoginPage: React.FC = () => {
 
     return (
         <>
-
-            {success ? (
-                <section>
-                    <h1>You are logged in!</h1>
-                    <br />
-                    <p>
-                        <Link to="/home">Go to Home</Link>
-                    </p>
-                </section>
-            ) : (
-
-            <div className="w-full bg-gradient-to-br from-teal-800 via-stone-400 to-yellow-600 min-h-screen flex items-center justify-center lg:px-8 loginpage">
-                <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-                <div className="sm:w-[100%] md:w-[50%] py-10 px-12 bg-black dark:bg-white/70 backdrop-blur-lg rounded-xl logincard">
-
-
-                    {/* this is just a separation  */}
-                    <div className="w-full h-auto flex items-center gap-x-1 my-5">
-                        <div className="w-1/2 h-[1.5px] bg-gray-700/40 rounded-md"></div>
-                        <p className="text-3xl text-gray-700 font-semibold px-2">LOGIN</p>
-                        <div className="w-1/2 h-[1.5px] bg-gray-700/40 rounded-md"></div>
-                    </div>
-                    <p className="text-sm text-white dark:text-teal-950 font-normal mb-8">
-                        Are you ready to start a new day?
-                    </p>
-                    <form onSubmit={handleSubmit}>
-                        {/* Real Login part */}
-                        <div className="w-full h-auto mb-5">
-                            <label htmlFor="pseudo" className="block text-white dark:text-teal-950 mb-1"> User name </label>
-                            <input
-                                required
-                                type="text"
-                                className="w-full h-12 p-4 outline-none bg-transparent border-[2px] rounded-md border-gray-200/40 text-white dark:text-teal-950"
-                                id="pseudo" // Changed id to "pseudo" to match label's htmlFor
-                                ref={userRef}
-                                onChange={(e) => setPseudo(e.target.value)}
-                                value={pseudo}
-                                placeholder="Enter your username"
-                            />
-
-                        </div>
-
-                        <div className="w-full h-auto mb-5 text-white dark:text-teal-950">
-                            <label htmlFor="role" className="block text-white dark:text-teal-950 mb-1"> Role selection </label>
-                            <select 
-                                className="w-full text-sm h-12 p-2 outline-none bg-transparent border-[2px] rounded-md border-gray-200/40 text-white dark:text-teal-950" 
-                                id="role"
-                                value={Role}
-                                onChange={(e)  => setRole(e.target.value)}
-                            >
-                                <option value="">--Please Choose your role--</option>
-                                <option value="admin">Admin</option>
-                                <option value="manager">Manager</option>
-                            </select>
-
-                        </div>
-
-                        <div className="w-full h-auto mb-5 text-white dark:text-teal-950">
-                            <label htmlFor="password" className="block text-white dark:text-teal-950 mb-1"> Password </label>
-                            <input
-                                required
-                                type="password"
-                                className="w-full h-12 p-4 outline-none bg-transparent border-[2px] rounded-md border-gray-200/40 text-white dark:text-teal-950"
-                                id="password" // Changed id to "password" to match label's htmlFor
-                                onChange={(e) => setPassword(e.target.value)}
-                                value={password}
-                                placeholder="Enter your password"
-                            />
-                        </div>
-
-                        {/* the bottoms */}
-                        <div className="w-full h-auto flex items-center justify-between mb-5">
-                            <div className="flex items-center gap-x-2">
-                                <input 
-                                    type="checkbox" 
-                                    className="w-4 h-4 accent-gray-200/20 border border-gray-200/20 rounded-md text-white dark:text-teal-950" 
-                                    id="remember" 
-                                />
-                                <label htmlFor="remember" className="text-[0.875rem] text-white dark:text-teal-950 ">Remember me</label>
-                            </div>
-                            <div className="w-auto h-auto">
-                                <Link to='/' className="text-white dark:text-teal-950 text-sm font-medium hover:underline ease-in-out duration-500">Forgot Password?</Link>
-                            </div>
-                        </div>
-                        <button className="w-full h-12 outline-none bg-white/70 rounded-md text-lg text-black font-medium mb-7">
-                            LOGIN
-                        </button>
-                    </form>
+          {success ? (
+            <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-teal-800 via-stone-400 to-yellow-600 p-6">
+              <div className="text-center text-white dark:text-teal-950">
+                <h1 className="text-2xl font-bold mb-4">You are logged in!</h1>
+                <Link
+                  to="/home"
+                  className="text-lg underline font-semibold hover:text-yellow-300 transition"
+                >
+                  Go to Home
+                </Link>
+              </div>
+            </section>
+          ) : (
+            <div className="w-full min-h-screen flex items-center justify-center bg-gradient-to-br from-teal-800 via-stone-400 to-yellow-600 p-4">
+              <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
+              
+              <div className="w-full max-w-md sm:max-w-lg md:max-w-xl bg-black/80 dark:bg-white/70 backdrop-blur-lg rounded-xl p-6 sm:p-10">
+                
+                {/* Section title */}
+                <div className="flex items-center justify-center gap-2 mb-6">
+                  <div className="flex-grow h-[1.5px] bg-gray-300 rounded-md" />
+                  <p className="text-2xl font-semibold text-white dark:text-teal-950">LOGIN</p>
+                  <div className="flex-grow h-[1.5px] bg-gray-300 rounded-md" />
                 </div>
+      
+                <p className="text-sm text-white dark:text-teal-950 text-center mb-6">
+                  Are you ready to start a new day?
+                </p>
+      
+                <form onSubmit={handleSubmit} className="space-y-5">
+                  {/* Username */}
+                  <div>
+                    <label htmlFor="pseudo" className="block mb-1 text-sm font-medium text-white dark:text-teal-950">User Name</label>
+                    <input
+                      required
+                      type="text"
+                      id="pseudo"
+                      ref={userRef}
+                      value={pseudo}
+                      onChange={(e) => setPseudo(e.target.value)}
+                      className="w-full px-4 py-3 border rounded-md border-gray-300 bg-transparent text-white dark:text-teal-950 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      placeholder="Enter your username"
+                    />
+                  </div>
+      
+                  {/* Role selection */}
+                  <div>
+                    <label htmlFor="role" className="block mb-1 text-sm font-medium text-white dark:text-teal-950">Role Selection</label>
+                    <select
+                      id="role"
+                      value={Role}
+                      onChange={(e) => setRole(e.target.value)}
+                      className="w-full px-3 py-3 border rounded-md border-gray-300 bg-transparent text-white dark:text-teal-950 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    >
+                      <option value="">-- Please Choose your Role --</option>
+                      <option value="admin">Admin</option>
+                      <option value="manager">Manager</option>
+                    </select>
+                  </div>
+      
+                  {/* Password */}
+                  <div>
+                    <label htmlFor="password" className="block mb-1 text-sm font-medium text-white dark:text-teal-950">Password</label>
+                    <input
+                      required
+                      type="password"
+                      id="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      className="w-full px-4 py-3 border rounded-md border-gray-300 bg-transparent text-white dark:text-teal-950 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      placeholder="Enter your password"
+                    />
+                  </div>
+      
+                  {/* Remember me and Forgot */}
+                  <div className="flex items-center justify-between">
+                    <label className="flex items-center gap-2 text-sm text-white dark:text-teal-950">
+                      <input type="checkbox" className="accent-teal-500" />
+                      Remember me
+                    </label>
+                    <Link to="/" className="text-sm font-medium text-white dark:text-teal-950 hover:underline">
+                      Forgot Password?
+                    </Link>
+                  </div>
+      
+                  {/* Submit */}
+                  <button
+                    type="submit"
+                    className="w-full py-3 rounded-md bg-white/80 text-black font-medium hover:bg-white transition"
+                  >
+                    LOGIN
+                  </button>
+                </form>
+              </div>
             </div>
-            )}
+          )}
         </>
-    )
+      );
+      
 }
