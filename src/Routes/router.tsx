@@ -7,8 +7,6 @@ import CombinedChart from '../modules/Chart/UI/Chart.complex';
 import { LoginPage } from '../modules/Auth/Pages/LoginPage';
 import RegisterPage from '../modules/Auth/Pages/RegisterPage';
 
-const Role = localStorage.getItem('Role');
-
 export const router = createBrowserRouter([
   {
     path: '/home',
@@ -18,6 +16,12 @@ export const router = createBrowserRouter([
       </ProtectedRoute>
     ), 
     children: [
+      {
+        index: true,
+        element: (
+          <CalendarContainer />
+        )
+      },
       {
         path: 'calendar',
         element: (

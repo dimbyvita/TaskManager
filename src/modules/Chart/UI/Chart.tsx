@@ -1,28 +1,41 @@
 import { LineChart } from '@mui/x-charts';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+
+interface ChartData {
+  labels: string[]; // mois en texte
+  series: {
+    data: (number | null)[];
+    valueFormatter?: (value: number | null) => string;
+  }[];
+}
 
 export default function ChartEvo() {
+  const [chartData, setChartData] = useState<ChartData | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:4257/api/stats');
+        // On suppose que le backend renvoie { labels: [...], series: [...] }
+        setChartData(response.data);
+      } catch (error) {
+        console.error('Erreur lors du chargement des données :', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (!chartData) return <p>Chargement...</p>;
+
   return (
     <LineChart
-      // xAxis={[{ data: [1, 2, 3, 5, 8, 10, 12, 15, 16] }]}
-      series={[
-        {
-          data: [2, 55, 2, 8, 15, 5, null, null, null],
-          valueFormatter: (value: number | null) =>
-            value == null ? 'NaN' : value.toString(),
-        },
-        {
-          data: [null, null, null, null, 55, 2, 85, 15, 5],
-        },
-        {
-          data: [7, 8, 5, 4, null, null, 2, 5.5, 1],
-          valueFormatter: (value: number | null) =>
-            value == null ? '?' : value.toString(),
-        },
-      ]}
-      yAxis={[{ data: [1, 2, 3, 5, 8, 10, 12, 15, 16] }]}
-      height={200}
-      margin={{ top: 10, bottom: 20 }}
+      xAxis={[{ data: chartData.labels }]} // Ex: ['Jan', 'Feb', 'Mar', ...]
+      series={chartData.series}
+      height={300}
       width={700}
+      margin={{ top: 10, bottom: 30 }}
     />
   );
 }

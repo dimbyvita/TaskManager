@@ -16,3 +16,21 @@ export default function ProtectedRoute({ allowedRoles, children }: ProtectedRout
   // Allowed → render children
   return <>{children}</>;
 }
+
+// import { Navigate } from 'react-router-dom';
+// import { useAuth } from '../contexte/AuthContext';
+
+// interface ProtectedRouteProps {
+//   allowedRoles: string[];
+//   children: React.ReactNode;
+// }
+
+// export default function ProtectedRoute({ allowedRoles, children }: ProtectedRouteProps) {
+//   const { isAuthenticated, Role } = useAuth();
+
+//   if (!isAuthenticated || !allowedRoles.includes(Role || '')) {
+//     return <Navigate to="/" replace />;
+//   }
+
+//   return <>{children}</>;
+// }
