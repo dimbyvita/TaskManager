@@ -48,5 +48,7 @@ export interface Task {
         dateStart: Date;
         priority: string;
     };
-    taskOwner: number | string;
+    taskOwner: EmployeeInfo;
+    status: string;
+    quantity: number
 }
