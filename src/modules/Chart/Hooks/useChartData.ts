@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../../../contexte/AuthContext';
@@ -56,3 +57,20 @@ export const useChartData = () => {
 
   return { data, loading, error };
 };
+=======
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+
+export const useChartData = ()  => {
+    useEffect(()=>{
+        const fetchData = async () => {
+            try{
+                const response = await axios.get(`http://localhost:4257/api/chart/}`)
+                
+            }
+            catch{}
+        };
+        fetchData();
+    })
+}
+>>>>>>> 172494c122605f1dd6dec4d477fddad4e2575a23

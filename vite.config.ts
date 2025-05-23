@@ -7,8 +7,14 @@ export default defineConfig({
   server:{
     host: 'localhost',
     port: 8122,
+<<<<<<< HEAD
     // hmr: {
     //   overlay: true,
     // },
+=======
+    hmr: {
+      overlay: true,
+    },
+>>>>>>> 172494c122605f1dd6dec4d477fddad4e2575a23
   }
 })
