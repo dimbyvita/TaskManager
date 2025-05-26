@@ -4,8 +4,7 @@ export type UserProfileToken = {
     token: string;
 }
 
-<<<<<<< HEAD
-=======
+
 export type UserContextType = {
     user: UserProfile | null;
     token: string | null;
@@ -16,7 +15,6 @@ export type UserContextType = {
     isLoggedIn: () => boolean;
 }
 
->>>>>>> 172494c122605f1dd6dec4d477fddad4e2575a23
 export type UserProfile = {
     pseudo: string;
     Role: string;

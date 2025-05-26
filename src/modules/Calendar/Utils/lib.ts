@@ -55,11 +55,9 @@ export const dateString = firstDayOfMonth.toLocaleDateString('en-US', {
   day: 'numeric'
 });
 
-<<<<<<< HEAD
+
 // Fonction pour vérifier si deux dates ont le même task
-=======
-// Fonction pour vérifier si deux dates ont le même Event
->>>>>>> 172494c122605f1dd6dec4d477fddad4e2575a23
+
 export const isSameDay = (date1: Date, date2: Date): boolean => {
   return date1.getDate() === date2.getDate() &&
          date1.getMonth() === date2.getMonth() &&
@@ -67,15 +65,8 @@ export const isSameDay = (date1: Date, date2: Date): boolean => {
 };
 
 // Fonction pour vérifier si une heure donnée est dans la plage d'un événement
-<<<<<<< HEAD
 export const isInHourRange = (hour: number, taskStart: Date, taskEnd: Date): boolean => {
   return (hour >= taskStart.getHours() && hour < taskEnd.getHours()) ||
          (hour === taskStart.getHours() && taskStart.getMinutes() > 0) ||
          (hour === taskEnd.getHours() && taskEnd.getMinutes() > 0);
-=======
-export const isInHourRange = (hour: number, eventStart: Date, eventEnd: Date): boolean => {
-  return (hour >= eventStart.getHours() && hour < eventEnd.getHours()) ||
-         (hour === eventStart.getHours() && eventStart.getMinutes() > 0) ||
-         (hour === eventEnd.getHours() && eventEnd.getMinutes() > 0);
->>>>>>> 172494c122605f1dd6dec4d477fddad4e2575a23
 };

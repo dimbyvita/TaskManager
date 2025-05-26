@@ -3,11 +3,7 @@ import React, { ChangeEvent, useState } from 'react';
 // Hook personnalisé pour gérer le changement de format d'affichage (par exemple, mensuel, hebdomadaire)
 export const useChangeFormat = () => {
   // Déclare un état local pour suivre le composant actif (par défaut, il est 'monthly')
-<<<<<<< HEAD
   const [activeComponent, setActiveComponent] = useState<string>("weekly");
-=======
-  const [activeComponent, setActiveComponent] = useState<string>("monthly");
->>>>>>> 172494c122605f1dd6dec4d477fddad4e2575a23
 
   // Gestionnaire d'événements pour changer le composant actif en fonction de la sélection de l'utilisateur
   const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {

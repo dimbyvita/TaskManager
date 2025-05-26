@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> 172494c122605f1dd6dec4d477fddad4e2575a23
 export class EmployeeId {
     private readonly id: string;
 
@@ -35,7 +31,6 @@ export interface User {
 }
 
 export interface EmployeeInfo {
-<<<<<<< HEAD
     id: string | number;
     name: string;
     firstname: string;
@@ -44,25 +39,4 @@ export interface EmployeeInfo {
     departement: string | number;
     matricule: string | number;
     address: string;
-=======
-    employeeId: string | number;
-    employeeFirstName: string;
-    employeeLastName: string;
-    employeeAddress: string;
-    employeeRole: string;
-    employeeScore?: number;
-}
-
-export interface Task {
-    idTask: number;
-    taskTitle: string;
-    designation: {
-        dateEnd: Date;
-        dateStart: Date;
-        priority: string;
-    };
-    taskOwner: EmployeeInfo;
-    status: string;
-    quantity: number
->>>>>>> 172494c122605f1dd6dec4d477fddad4e2575a23
 }

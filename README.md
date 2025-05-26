@@ -56,7 +56,5 @@ export default tseslint.config({
   },
 })
 ```
-=======
+
 # TaskManager
->>>>>>> 924dcb02e53b46615b60cac9fe82ffc6fd91cd78
->>>>>>> 172494c122605f1dd6dec4d477fddad4e2575a23
