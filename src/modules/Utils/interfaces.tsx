@@ -30,12 +30,16 @@ export interface User {
     userPassword: string | number;
 }
 
+// Example of using the type of the Role property correctly:
+type UserRoleType = User["Role"];
+
 export interface EmployeeInfo {
     id: string | number;
     name: string;
     firstname: string;
     email: string | number;
     fonction: string;
+    Role: UserRoleType;
     departement: string | number;
     matricule: string | number;
     address: string;

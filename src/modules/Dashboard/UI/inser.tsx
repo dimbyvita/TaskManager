@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 
 export const InsertTableIcon = ({ size = 22, color = 'currentColor', ...props }) => (
   <svg 

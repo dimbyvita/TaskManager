@@ -3,7 +3,7 @@ import { SidebarStatus } from '../Utils/Types';
 import { NavLink } from 'react-router-dom';
 import { TrendIcon } from '../UI/trend';
 import { CalendarIcon } from '../UI/Calendar';
-import { DocIcon } from '../UI/Docks';
+// import { DocIcon } from '../UI/Docks';
 import { HomeIcon } from '../UI/home';
 import { useAuth } from '../../../contexte/AuthContext';
 import { FaUserFriends } from 'react-icons/fa';

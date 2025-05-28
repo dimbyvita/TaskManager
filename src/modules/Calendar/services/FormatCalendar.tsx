@@ -1,4 +1,4 @@
-import React, {  useState } from 'react';
+import {  useState } from 'react';
 import { WeekView } from '../Components/week-view';
 import { useChangeFormat } from '../Hooks/useChangeFormat';
 import { DayView } from '../Components/Day-view';

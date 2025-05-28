@@ -19,7 +19,14 @@ export const ProfilesList = () => {
     await deleteEmployee(id, employees, setEmployees);
   };
 
-  if (loading) return <p>Loading employees...</p>;
+ if (loading) {
+  return (
+    <div className="h-full flex justify-center items-center">
+      <p>Loading employees...</p>
+    </div>
+  );
+}
+
 
   return (
     <div className='h-full'>
@@ -83,9 +90,7 @@ export const ProfilesList = () => {
         </div>
       </div>
       {openModal && selectedEmployee && (
-        <ModalProfil employee={selectedEmployee} closeModal={() => setOpenModal(false)} setEmployees={function (employees: EmployeeInfo[]): void {
-          throw new Error('Function not implemented.');
-        } } employees={[]} />
+        <ModalProfil employee={selectedEmployee} closeModal={() => setOpenModal(false)} setEmployees={setEmployees} employees={[]} />
       )}
     </div>
   );

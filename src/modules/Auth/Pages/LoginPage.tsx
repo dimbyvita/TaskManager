@@ -82,7 +82,7 @@ export const LoginPage: React.FC = () => {
                 ref={userRef}
                 value={pseudo}
                 onChange={(e) => setPseudo(e.target.value)}
-                className="w-full px-4 py-3 border rounded-md border-transparent bg-transparent text-teal-800 hover:text-teal-900 hover:outline-none hover:ring-2 hover:ring-teal-400 transition-all duration-300"
+                className="w-full px-4 py-3 border rounded-md border-transparent bg-transparent text-teal-800 hover:text-teal-900 hover:outline-none ring-1 hover:ring-2 hover:ring-teal-400 transition-all duration-300"
                 placeholder="Enter your username"
               />
             </div>
@@ -99,7 +99,7 @@ export const LoginPage: React.FC = () => {
                 id="Role"
                 value={Role}
                 onChange={(e) => setRole(e.target.value)}
-                className="w-full px-4 py-3 border rounded-md border-transparent bg-transparent text-teal-800 hover:text-teal-900 hover:outline-none hover:ring-2 hover:ring-teal-400 transition-all duration-300"
+                className="w-full px-4 py-3 border rounded-md border-transparent bg-transparent text-teal-800 hover:text-teal-900 hover:outline-none ring-1 hover:ring-2 hover:ring-teal-400 transition-all duration-300"
               >
                 <option value="">-- Choose your Role --</option>
                 <option value="admin">Admin</option>
@@ -122,7 +122,7 @@ export const LoginPage: React.FC = () => {
                 id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 border rounded-md border-transparent bg-transparent text-teal-800 hover:text-teal-900 hover:outline-none hover:ring-2 hover:ring-teal-400 transition-all duration-300"
+                className="w-full px-4 py-3 border rounded-md border-transparent bg-transparent text-teal-800 hover:text-teal-900 hover:outline-none ring-1 hover:ring-2 hover:ring-teal-400 transition-all duration-300"
                 placeholder="Enter your password"
               />
             </div>

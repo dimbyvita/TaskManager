@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 
 export const ListIcon = ({ size = 22, color = 'currentColor', ...props }) => (
   <svg 

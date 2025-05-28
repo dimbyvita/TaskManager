@@ -4,15 +4,6 @@ import { Day } from '../Utils/CalendarUtils';
 import { AuthContext } from '../../../contexte/AuthContext';
 import { Task } from '../../Task/Utils/Interfaces';
 
-interface UseWeekCalendarReturn {
-  nav: number;
-  days: Day[];
-  weekDisplay: string;
-  setNav: React.Dispatch<React.SetStateAction<number>>;
-  handleTodayClick: () => void;
-  tasks: Task[];
-  getTaskForDay: (date: Date) => Task[];
-}
 
 export const useWeekCalendar = () => {
   const { token, isReady } = useContext(AuthContext);

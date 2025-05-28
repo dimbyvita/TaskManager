@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 
 export const HomeIcon = ({ size = 24, color = 'currentColor', ...props }) => (
   <svg 

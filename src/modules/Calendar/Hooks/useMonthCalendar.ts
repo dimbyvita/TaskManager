@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import axios from '../../../api/axios';
 import { Day } from '../Utils/CalendarUtils';
 import { AuthContext } from '../../../contexte/AuthContext';

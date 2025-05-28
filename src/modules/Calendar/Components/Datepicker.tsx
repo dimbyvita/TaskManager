@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'; 
+import { ReactElement } from 'react'; 
 import { useMonthCalendar } from '../Hooks/useMonthCalendar'; 
 import { AfficheDay } from '../services/AfficheDay'; 
 import { ButtonBack } from '../UI/ButtonBack'; 

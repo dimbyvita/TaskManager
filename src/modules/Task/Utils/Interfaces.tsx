@@ -21,7 +21,7 @@ export interface ColorPickerProps {
 }
 
 export interface Task {
-  forEach(arg0: (event: any) => void): unknown;
+  // forEach(arg0: (task: any) => void): unknown;
   id: string | number;
   title: string;
   description?: string | any;

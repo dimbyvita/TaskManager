@@ -9,7 +9,7 @@ import axios from "axios";
 export const UserContext = createContext<UserContextType>({} as UserContextType);
 
 export const UserProvider = ({ children }: Props) => {
-    const {isReady, setIsReady, token, setToken, user, setUser,Role, setRole} = library()
+    const {isReady, setIsReady, token, setToken, user, Role, setRole} = library()
 
     const [userState, setUserState] = useState<string | null>()
 

@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 
 export const SettingIcon = ({ size = 24, color = 'currentColor', ...props }) => (
   <svg 

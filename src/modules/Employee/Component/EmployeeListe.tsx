@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 import { useEmployees } from "../Hook/useEployee";
 
 
@@ -25,7 +25,7 @@ export const EmployeeList = () => {
               <tr key={employee.id} className="border-b">
                 <td className="p-4">
                   <img
-                    src={employee.avatar}
+                    // src={employee.avatar}
                     alt={employee.name}
                     className="w-12 h-12 rounded-full"
                   />

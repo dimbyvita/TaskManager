@@ -32,7 +32,7 @@ export function ModalTask(props: ModalProps) {
       quantity,
       departement,
       fromOrigin: false,
-      forEach: (arg0: any) => {}
+      // forEach: (arg0: any) => {}
     };
 
     try {

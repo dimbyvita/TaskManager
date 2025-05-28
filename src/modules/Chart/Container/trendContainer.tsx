@@ -4,7 +4,7 @@ import { ActivTask } from '../Component/ActivTask'
 import { Team } from '../Component/Team'
 import { Productivity } from '../Component/Productivity'
 import { ProjectTable } from '../Component/TableTask'
-import ChartEvo from '../UI/Chart'
+// import ChartEvo from '../UI/Chart'
 
 export const TrendContainer = () => {
   return (
@@ -22,7 +22,7 @@ export const TrendContainer = () => {
 
         <ProjectTable/>
 
-        <ChartEvo/>
+        {/* <ChartEvo/> */}
     </>
   )
 }
