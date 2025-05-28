@@ -1,9 +1,8 @@
-
 import { Project } from "../../Chart/Utils/lib";
 import { ButtonBack } from "../UI/ButtonBack";
 import { ButtonForward } from "../UI/ButtonForward";
 import { useDayCalendar } from "../Hooks/useDayCalendar";
-import { useProjectData } from "../../Chart/Hooks/useProjectData";
+// import { useProjectData } from "../../Chart/Hooks/useProjectData";
 
 interface DayViewProps {
   project: Project[];
@@ -11,8 +10,7 @@ interface DayViewProps {
 export const DayView: React.FC<DayViewProps> = () => {
   const { nav, days, dayDisplay, setNav, handleTodayClick, getProjectsForDay } =
     useDayCalendar();
-  const { projects } = useProjectData();
-
+  // const { projects } = useProjectData();
 
   // Check if days is an array and has at least one element
   const isDaysValid = Array.isArray(days) && days.length > 0;
@@ -28,7 +26,6 @@ export const DayView: React.FC<DayViewProps> = () => {
           <button
             onClick={handleTodayClick}
             className="p-2 rounded bg-blue-500 text-white"
-
             aria-label="Go to Today"
           >
             Today
@@ -66,7 +63,7 @@ export const DayView: React.FC<DayViewProps> = () => {
                     `}
                     >
                       <div className="space-y-[2px] h-full overflow-auto">
-                        {projects.map((project) => {
+                        {ProjectForHour.map((project) => {
                           const progress = project.progress || 0;
 
                           const getColor = (progress: number) => {
@@ -77,6 +74,7 @@ export const DayView: React.FC<DayViewProps> = () => {
 
                           return (
                             <div
+                              key={project.id}
                               className={`h-full text-white text-xs px-1 truncate ${getColor(
                                 progress
                               )}`}
